@@ -32,6 +32,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_forward"):
 		direction.z -= 1
 		
+		
 	# Jumping.
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y += jump_impulse
@@ -43,9 +44,14 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		$Pivot.look_at(translation + direction, Vector3.UP)
+		$AnimationPlayer.playback_speed = 4
+	else:
+			$AnimationPlayer.playback_speed = 1
+		
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
 	
+	$Pivot.rotation.x = PI / 6 * velocity.y / jump_impulse
 	
 	for index in range(get_slide_count()):
 		# We check every collision that occurred this frame.
