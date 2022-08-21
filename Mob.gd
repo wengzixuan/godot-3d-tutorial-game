@@ -15,6 +15,9 @@ func squash():
 	queue_free()
 
 
+func _physics_process(_delta):
+# warning-ignore:return_value_discarded
+	move_and_slide(velocity)
 
 # We will call this function from the Main scene.
 func initialize(start_position, player_position):
